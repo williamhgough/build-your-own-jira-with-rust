@@ -1,5 +1,3 @@
-use crate::path_to_enlightenment::visibility::ticket::Status;
-
 /// You might have noticed that in the test for the previous koan we haven't checked if
 /// the status returned by `.status()` matched the status we passed to `create_ticket`.
 ///
@@ -51,19 +49,26 @@ use crate::path_to_enlightenment::visibility::ticket::Status;
 /// But let's roll with this simplified version for now.
 ///
 /// Let's implement it for Status!
+///
+use crate::path_to_enlightenment::visibility::ticket::Status;
+
 impl PartialEq for Status {
     fn eq(&self, other: &Status) -> bool {
         // If you need to refresh the `match` syntax, checkout
         // https://doc.rust-lang.org/book/ch06-02-match.html
         match (self, other) {
-            __
+            (Status::ToDo, Status::ToDo) => true,
+            (Status::InProgress, Status::InProgress) => true,
+            (Status::Blocked, Status::Blocked) => true,
+            (Status::Done, Status::Done) => true,
+            (_, _) => false,
         }
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use crate::path_to_enlightenment::visibility::ticket::Status;
 
     #[test]
     fn test_equality() {
